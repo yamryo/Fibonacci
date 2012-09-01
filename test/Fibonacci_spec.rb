@@ -1,7 +1,7 @@
 #
 # Fibonacci_spec.rb
 # 
-# Time-stamp: <2012-08-29 18:51:22 (ryosuke)>
+# Time-stamp: <2012-09-01 12:05:22 (ryosuke)>
 
 src_path = Dir.pwd + '/../src'
 $:.unshift(src_path)
@@ -30,32 +30,31 @@ end
 #---
 
 #-----------------------------
-describe Fibonacci, "when indices given" do
+describe Fibonacci, "with arugment" do
   before(:all) do
     @myfib = Fibonacci.new
     @myarr = Array.new([0,1,1,2,3,5,8,13,21,34,55])
   end
 
-  it "should generate new terms if needed" do
+  it "should generate new terms if they don't exist" do
 #    @myarr.size.times{ |k| @myfib[k-1].should == @myarr[k-1]}
-    @myfib[0].should == @myarr[0]
-    @myfib[1].should == @myarr[1]
     @myfib[2].should == @myarr[2]
+    @myfib[3].should == @myarr[3]
+    @myfib[4].should == @myarr[5]
   end
 
-  it "should return a sequence if an array of indices given" do
+  it "should return a sequence for a give array of indices" do
     idxseq = [2,5,10]
-    @myfib[idxseq].should == idxseq.map!{ |k| @myarr[k]}
+    @myfib[idxseq].should == idxseq.map{ |k| @myarr[k]}
   end
 
-  it "should return a sequence if a range of indices given" do
+  it "should return a sequence for a give range of indices" do
     @myfib[0..5].should == @myarr[0..5]
   end
 
   it "should return nil if a wrong argument given" do
-    @myfib[[]].should == 
+    @myfib[[]].should be_nil 
   end
-
 end
 #---
 
