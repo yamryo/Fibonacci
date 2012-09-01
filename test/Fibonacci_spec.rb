@@ -1,7 +1,7 @@
 #
 # Fibonacci_spec.rb
 # 
-# Time-stamp: <2012-09-01 12:05:22 (ryosuke)>
+# Time-stamp: <2012-09-01 13:33:28 (ryosuke)>
 
 src_path = Dir.pwd + '/../src'
 $:.unshift(src_path)
@@ -36,24 +36,34 @@ describe Fibonacci, "with arugment" do
     @myarr = Array.new([0,1,1,2,3,5,8,13,21,34,55])
   end
 
-  it "should generate new terms if they don't exist" do
-#    @myarr.size.times{ |k| @myfib[k-1].should == @myarr[k-1]}
-    @myfib[2].should == @myarr[2]
-    @myfib[3].should == @myarr[3]
-    @myfib[4].should == @myarr[5]
+  it "should return initial terms" do
+    @myfib[0].should == 0
+    @myfib[1].should == 1
   end
 
-  it "should return a sequence for a give array of indices" do
-    idxseq = [2,5,10]
-    @myfib[idxseq].should == idxseq.map{ |k| @myarr[k]}
+   it "should generate new terms if they don't exist" do
+    @myarr.size.times{ |k| @myfib[k].should == @myarr[k] }
+     # @myfib[2].should == @myarr[2]
+     # @myfib[3].should == @myarr[3]
+     # @myfib[4].should == @myarr[4]
+   end
+
+   it "should return a sequence for a given array of indices" do
+     idxseq = [2,5,10]
+     @myfib[idxseq].should == idxseq.map{ |k| @myarr[k]}
+   end
+
+   it "should return a sequence for a given range of indices" do
+     @myfib[0..5].should == @myarr[0..5]
+   end
+
+  it "should accept single argument only" do
+    @myfib[1,2].should raise_error
   end
 
-  it "should return a sequence for a give range of indices" do
-    @myfib[0..5].should == @myarr[0..5]
-  end
-
-  it "should return nil if a wrong argument given" do
-    @myfib[[]].should be_nil 
+  it "should not accept empty or nil argument" do
+    @myfib[Array.new()].should raise_error
+#    @myfib[].should raise_error
   end
 end
 #---

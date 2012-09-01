@@ -1,7 +1,7 @@
 #
 # Fibonacci.rb
 # 
-# Time-stamp: <2012-08-29 18:51:26 (ryosuke)>
+# Time-stamp: <2012-09-01 13:32:43 (ryosuke)>
 
 require('pry')
 require('pry-nav')
@@ -28,41 +28,28 @@ class Fibonacci
     return self
   end
 
+  def [](*arg)
+    return get_terms(arg[0])
+  end
   def get_terms(*arg)
-    rtn = []
-    case arg.size
-    when 0
-      return nil
-    when 1
-      if arg[0].class.to_s == "Fixnum" then
-        return get_a_term(arg) 
-      else
-        raise ArgumentError
-      end
+    raise ArgumentError, "Wrong arguments!!" if arg.nil? or arg.size > 1
+    arg = arg[0]
+    case arg.class.name
+    when 'Fixnum'
+#      binding.pry if arg == 2
+      rtn = get_a_term(arg)
+    when 'Range', 'Array'
+      rtn = (arg.to_a).map{ |num| get_a_term(num) }
     else
-      arg.each do |entry| 
-        case entry.class.to_s
-        when "Fixnum"
-          rtn << get_a_term(entry)
-        when "Range"
-          entry = entry.to_a
-        when  "Array"
-        else
-          raise ArgumentError
-        end
-        rtn << entry.map!{ |num| get_a_term(num) }
-      end
+      raise ArgumentError
     end
+    return rtn
   end
   def get_a_term(num)
     num = num.to_i
     set_terms(num + 1)
     return @terms[num]
   end
-  def [](*arg)
-    return get_terms(arg)
-  end
-
 
   def length()
     @terms.length
