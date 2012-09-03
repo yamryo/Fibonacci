@@ -1,15 +1,9 @@
 #
 # Fibonacci_spec.rb
 # 
-# Time-stamp: <2012-09-01 13:33:28 (ryosuke)>
+# Time-stamp: <2012-09-03 20:47:18 (ryosuke)>
 
-src_path = Dir.pwd + '/../src'
-$:.unshift(src_path)
-
-#require('rubygems')
-#require('test/unit/full')
-#require('test/unit')
-#require('~/rubyP/test_unit_extensions')
+$LOAD_PATH.push File.expand_path(File.dirname(__FILE__) + '/../src')
 
 require('Fibonacci')
 
