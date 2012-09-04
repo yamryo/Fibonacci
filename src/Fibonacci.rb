@@ -1,7 +1,7 @@
 #
 # Fibonacci.rb
 # 
-# Time-stamp: <2012-09-01 13:32:43 (ryosuke)>
+# Time-stamp: <2012-09-04 10:12:07 (ryosuke)>
 
 require('pry')
 require('pry-nav')
@@ -60,36 +60,12 @@ class Fibonacci
   
   def ratio(num)
     num = num.to_i
-    set_terms(num + 1)
+    set_terms(num + 2)
     return @terms[num].to_f/@terms[num + 1].to_f
   end
 
 end
 #--- end of Fibonacci class ---
-
-#----------------------------------
-class Array
-  def pickup(*arg)
-    if arg.length == 0 then 
-      return self
-    else
-      if arg[0].class.to_s == "Range" then
-        arg = arg[0].to_a
-      end
-      myArr = []
-      arg.each{ |num| myArr << self[num.to_i] }
-      return myArr
-    end
-  end
-
-  def mdisp(*arg)
-    spliter = if (arg.length == 0) then ',' else arg[0] end
-    mystr = ''
-    self.each{ |term| mystr += term.to_s + spliter }
-    puts mystr.chop
-  end
-end
-#--- end of extension of Array class ---
 
 #-----------------#
 ### End of File ###
